@@ -2,7 +2,7 @@
  *
  * @param {HTMLDivElement} element
  */
-export const enviromentComponet = (element) => {
+export const enviromentComponent = (element) => {
 
 	console.log(import.meta.env);
 
