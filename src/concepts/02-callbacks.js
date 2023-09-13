@@ -6,16 +6,24 @@ import { heroes } from "../data/heroes";
  */
 export const callbacksComponent = (element) => {
 
-	const id = '5d86371f233c9f2425f16916';
-	findHero(id, (err, hero) => {
+	const id1 = '5d86371f233c9f2425f16916';
+	const id2 = '5d86371fd55e2e2a30fe1ccb1';
+	findHero(id1, (err, hero1) => {
 
 		if (err) {
 			element.innerHTML = err;
 			return;
 		}
 
-		// element.innerHTML = hero?.name || 'No hay heroe';
-		element.innerHTML = hero.name;
+		findHero(id2, (err, hero2) => {
+			if (err) {
+				element.innerHTML = err;
+				return;
+			}
+			// element.innerHTML = hero?.name || 'No hay heroe';
+			element.innerHTML = `${hero1.name} / ${hero2.name}`;
+		})
+
 	} );
 
 };
