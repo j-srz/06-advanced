@@ -7,7 +7,14 @@ import { heroes } from "../data/heroes";
 export const callbacksComponent = (element) => {
 
 	const id = '5d86371f233c9f2425f16916';
-	findHero(id, (hero) => {
+	findHero(id, (err, hero) => {
+
+		if (err) {
+			element.innerHTML = err;
+			return;
+		}
+
+		// element.innerHTML = hero?.name || 'No hay heroe';
 		element.innerHTML = hero.name;
 	} );
 
@@ -16,10 +23,15 @@ export const callbacksComponent = (element) => {
 /**
  *
  * @param {String} id
- * @param { (hero: Object)=> void } callback
+ * @param { (error: String|Null, hero: Object)=> void } callback
  */
 const findHero = (id, callback) => {
   const hero = heroes.find((hero) => hero.id === id);
 
-  callback(hero);
+	if (!hero) {
+		callback(`Hero with id ${ id } not found`);
+		return; // undefined
+	}
+
+  callback(null, hero);
 };
